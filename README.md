@@ -21,9 +21,6 @@ _Add screenshots after deployment._
 - Node.js / Express
 - PostgreSQL
 - Docker (for backend)
-  
-
-## 🚀 Live Demo
 
 ## 📦 Installation
 
