@@ -31,7 +31,7 @@ _Add screenshots after deployment._
 
 bash
 # Clone the repository
-git clone https://github.com/YOUR-USERNAME/dream-vacation-app.git
+git clone https://github.com/Agbaje24i/dream-vacation-app.git
 
 # Go into the frontend directory
 cd dream-vacation-app/frontend
