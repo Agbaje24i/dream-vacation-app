@@ -1,4 +1,4 @@
-      - name: DEBUG: Print Docker secrets (just for test)
-        run: |
-          echo "USERNAME = ${{ secrets.DOCKER_USERNAME }}"
-          echo "TOKEN LENGTH = ${#${{ secrets.DOCKER_TOKEN }}}"
+- name: DEBUG: Check if secrets are present
+  run: |
+    echo "DOCKER_USERNAME = ${{ secrets.DOCKER_USERNAME }}"
+    echo "TOKEN is present? ${{ secrets.DOCKER_TOKEN != '' }}"
