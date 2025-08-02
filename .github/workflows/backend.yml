@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    environment: production  # <- tell GitHub to load from this environment
 
     steps:
       - name: Checkout code
