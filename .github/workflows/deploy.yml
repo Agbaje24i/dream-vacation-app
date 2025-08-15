@@ -3,23 +3,30 @@ name: Deploy to Azure VM
 on:
   push:
     branches:
-      - main  # Change this if you deploy from another branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Setup SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.AZURE_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 172.190.13.34 >> ~/.ssh/known_hosts
-
-      - name: Deploy to Azure VM
-        run: |
-          ssh azureuser@172.190.13.34 "cd /home/azureuser && echo 'Connected to VM!'"
+    - name: Deploy to Azure VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.AZURE_VM_IP }}
+        username: azureuser
+        key: ${{ secrets.AZURE_VM_PRIVATE_KEY }}
+        script: |
+          if [ ! -d "~/dream-vacation-app" ]; then
+            git clone https://github.com/Agbaje24i/dream-vacation-app.git ~/dream-vacation-app
+          else
+            cd ~/dream-vacation-app && git pull origin main
+          fi
+          cd ~/dream-vacation-app
+          npm install
+          npx pm2 stop all || true
+          npx pm2 start npm -- start
+          npx pm2 save
