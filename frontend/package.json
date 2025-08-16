@@ -20,25 +20,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "preview": "npx serve -s build"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["react-app", "react-app/jest"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
@@ -51,8 +41,7 @@
     "tailwindcss": "^3.4.17"
   },
   "description": "Welcome to the Dream Vacation App! This is a responsive full-stack web app where users can explore dream destinations, view vacation packages, and make bookings easily.",
-  "main": "postcss.config.js",
-  "keywords": [],
+  "main": "src/index.js",
   "author": "",
   "license": "ISC"
 }
