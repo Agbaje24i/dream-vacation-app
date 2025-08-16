@@ -10,7 +10,7 @@ This project deploys the **Dream Vacation App** to Azure Virtual Machine (VM) wi
 - Created **Network Security Group**: `dream-nsg`
 - Allowed inbound ports: `22 (SSH)`, `80 (HTTP)`, `3000 (Frontend)`.
 
-📸 Screenshot:  
+📸 Azure image:  
 ![Dream VNet](./screenshots/dream%20vnet.png)
 
 ---
@@ -20,7 +20,7 @@ This project deploys the **Dream Vacation App** to Azure Virtual Machine (VM) wi
 - Installed Node.js, NPM, Docker & Docker Compose
 - Configured Security Group to allow access
 
-📸 Screenshots:  
+📸 Azure image:  
 ![Deploy VM](./screenshots/deploy%20vm.png)  
 ![Dream VM](./screenshots/dream%20vm.png)
 
@@ -32,7 +32,7 @@ This project deploys the **Dream Vacation App** to Azure Virtual Machine (VM) wi
 - Connected backend on port 5000
 - Verified app works on VM Public IP (`http://<your-public-ip>:3000`)
 
-📸 Screenshots:  
+📸 Azure image:  
 ![App in Browser 1](./screenshots/app%20in%20browser1.png)  
 ![App in Browser 2](./screenshots/app%20in%20browser2.png)  
 ![App in Browser 3](./screenshots/app%20in%20browser3.png)
@@ -44,7 +44,7 @@ This project deploys the **Dream Vacation App** to Azure Virtual Machine (VM) wi
 - SSH into VM, copies files, runs Docker Compose
 - Auto-deploys the latest version
 
-📸 Screenshot:  
+📸 Azure image:  
 *(Add your pipeline logs screenshot here if available)*
 
 ---
@@ -66,7 +66,7 @@ Welcome to the Dream Vacation App! This is a responsive full-stack web app where
 - Responsive design using Tailwind CSS
 - React frontend connected to a Node.js/Express backend with PostgreSQL
 
-## 📸 Screenshots
+## 📸 Azure image
 
 _Add screenshots after deployment._
 
