@@ -1,4 +1,4 @@
-name: Deploy to Azure VM
+name: Deploy Dream Vacation App
 
 on:
   push:
@@ -10,23 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Deploy to Azure VM
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.AZURE_VM_IP }}
-        username: azureuser
-        key: ${{ secrets.AZURE_VM_PRIVATE_KEY }}
-        script: |
-          if [ ! -d "~/dream-vacation-app" ]; then
-            git clone https://github.com/Agbaje24i/dream-vacation-app.git ~/dream-vacation-app
-          else
-            cd ~/dream-vacation-app && git pull origin main
-          fi
-          cd ~/dream-vacation-app
-          npm install
-          npx pm2 stop all || true
-          npx pm2 start npm -- start
-          npx pm2 save
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push Docker images
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dream-frontend ./frontend
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dream-frontend
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dream-backend ./backend
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/dream-backend
+
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/dream-vacation-app
+            git pull origin main
+            docker compose down
+            docker compose pull
+            docker compose up -d --build
+
