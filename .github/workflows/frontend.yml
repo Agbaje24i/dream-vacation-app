@@ -13,17 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
-
-      - name: Build and push frontend image
-        run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/dream-frontend:latest ./frontend
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/dream-frontend:latest
-
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -31,7 +20,11 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/dream-frontend:latest
+            cd ~/app || mkdir ~/app && cd ~/app
+            rm -rf dream-vacation-app
+            git clone https://github.com/${{ github.repository }}.git
+            cd dream-vacation-app/frontend
+            docker build -t dream-frontend .
             docker stop frontend || true
             docker rm frontend || true
-            docker run -d --name frontend -p 3000:3000 ${{ secrets.DOCKER_HUB_USERNAME }}/dream-frontend:latest
+            docker run -d --name frontend -p 3000:3000 dream-frontend
