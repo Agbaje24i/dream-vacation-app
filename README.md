@@ -1,101 +1,61 @@
-# Dream Vacation App – Azure Deployment
+# Dream Vacation App – AWS Deployment 🚀
 
-This project deploys the **Dream Vacation App** to Azure Virtual Machine (VM) with networking setup and CI/CD pipeline integration.
+This project demonstrates deploying the **Dream Vacation App** on **AWS EC2** using a custom **VPC**, **subnet**, and a **CI/CD pipeline**.
 
----
+## Part 1 – Networking Setup 🌐
 
-## Part 1 – Networking Setup (Azure)
-- Created **Virtual Network**: `dream-vnet`
-- Created **Subnet**: `dream-subnet`
-- Created **Network Security Group**: `dream-nsg`
-- Allowed inbound ports: `22 (SSH)`, `80 (HTTP)`, `3000 (Frontend)`.
+- **VPC Name:** dream-vpc 
+- **CIDR Block:** 10.0.0.0/16  
+- **Subnet Name:** dream-subnet 
+- **CIDR Block:** 10.0.1.0/24  
+- **Internet Gateway:** dream-igw  
+- **Route Table:** dream-rt (associated with VPC)  
 
-📸 Azure image:  
-![Dream VNet](./screenshots/dream%20vnet.png)
+📸 **Screenshot – VPC and Subnet**
+Aws images vpc.png
+Aws images subnet2.png
 
----
+## Part 2 – EC2 Instance Setup 💻
 
-## Part 2 – VM Setup
-- Launched Ubuntu VM (`dream-vm`)
-- Installed Node.js, NPM, Docker & Docker Compose
-- Configured Security Group to allow access
+- **AMI:** Ubuntu  
+- **Instance Type:** t2.micro  
+- **User Data Script:** installs Docker & Docker Compose  
 
-📸 Azure image:  
-![Deploy VM](./screenshots/deploy%20vm.png)  
-![Dream VM](./screenshots/dream%20vm.png)
+📸 **EC2 Instance**
+Aws images EC2.png
+Aws images Ubuntu1.png
+Aws images Ubuntu2.png
+Aws images Ubuntu3.png
+Aws images Ubuntu4.png
+Aws images Ubuntu5.png
 
----
+## Part 3 – CI/CD Deployment ⚙️
 
-## Part 3 – Deployment
-- Built frontend with `npm run build`
-- Served frontend using `serve -s build`
-- Connected backend on port 5000
-- Verified app works on VM Public IP (`http://<your-public-ip>:3000`)
+- GitHub Actions pipeline builds and deploys Docker containers  
+- Deployment target: EC2 instance  
+- Runs using docker-compose`  
 
-📸 Azure image:  
-![App in Browser 1](./screenshots/app%20in%20browser1.png)  
-![App in Browser 2](./screenshots/app%20in%20browser2.png)  
-![App in Browser 3](./screenshots/app%20in%20browser3.png)
+## Part 4 – Application Running 🎉
 
----
+- The Dream Vacation App is successfully running on the EC2 public IP.  
 
-## Part 4 – CI/CD Pipeline
-- GitHub Actions pipeline builds & pushes Docker image
-- SSH into VM, copies files, runs Docker Compose
-- Auto-deploys the latest version
+📸 **Screenshot – App in Browser**
+Awsimages dreamapp1.png
+Awsimages dreamapp2.png
+Awsimages dreamapp3.png
 
-📸 Azure image:  
-*(Add your pipeline logs screenshot here if available)*
 
----
+## Deliverables ✅
 
-## Deliverables
-✅ VPC + Subnet Screenshot  
-✅ VM Screenshots  
-✅ App Running Screenshots  
-✅ CI/CD Logs Screenshot
-# 🌴 Dream Vacation App 🛫
+Aws images vpc.png
+Aws images subnet2.png
+Aws images EC2.png
+Awsimages dreamapp1.png
+Awsimages dreamapp2.png
+Awsimages dreamapp3.png
+Awsimages igw.png
+Awsimages Rt.png
 
-Welcome to the Dream Vacation App! This is a responsive full-stack web app where users can explore dream destinations, view vacation packages, and make bookings easily.
+     
 
-## ✨ Features
-
-- Beautiful landing page with background image
-- Navigation: Home, Destinations, Bookings
-- Popular Vacation Packages with images and descriptions
-- Responsive design using Tailwind CSS
-- React frontend connected to a Node.js/Express backend with PostgreSQL
-
-## 📸 Azure image
-
-_Add screenshots after deployment._
-
-## 🔧 Tech Stack
-
-- React
-- Tailwind CSS
-- Node.js / Express
-- PostgreSQL
-- Docker (for backend)
-
-## 📦 Installation
-
-bash
-# Clone the repository
-git clone https://github.com/Agbaje24i/dream-vacation-app.git
-
-# Go into the frontend directory
-cd dream-vacation-app/frontend
-
-# Install dependencies
-npm install
-
-# Start the frontend
-npm start
-
-🤝 Contact
-Email: adekunleisaac1989@gmail.com
-
-Phone: +2348142723736
-Triggered CI/CD
-final trigger
+All screenshots are available in the Aws images folder.
