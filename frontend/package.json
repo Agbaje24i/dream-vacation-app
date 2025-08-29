@@ -16,12 +16,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "preview": "npx serve -s build"
+    "preview": "npx serve -s build -l 3000"
   },
   "eslintConfig": {
     "extends": ["react-app", "react-app/jest"]
@@ -42,6 +42,5 @@
   },
   "description": "Welcome to the Dream Vacation App! This is a responsive full-stack web app where users can explore dream destinations, view vacation packages, and make bookings easily.",
   "main": "src/index.js",
-  "author": "",
   "license": "ISC"
 }
