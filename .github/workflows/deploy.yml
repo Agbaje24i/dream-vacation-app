@@ -32,10 +32,15 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
             cd ~/dream-vacation-app
-            git pull origin main
+            # Stop any running containers
             docker compose down
+            # Pull the latest images from Docker Hub
             docker compose pull
-            docker compose up -d --build
+            # Start containers in detached mode
+            docker compose up -d
+            # Optional: clean unused images
+            docker image prune -f
 
